@@ -1,21 +1,44 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../firebase-config";
 import { SignUpPopup } from "../components/SignUpPopup";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate, Link } from "react-router-dom";
 
 export const Login = () => {
   const [show, setShow] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
+  // const {signIn} = useAuth();
+
+  const LoginWithPassword = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // signIn();
+      toast.success("User login successfull", { position: "top-center" });
+      navigate("/dashboard");
+    } catch (err) {
+      toast.error(err.message, { position: "top-center" });
+    }
+  };
+
   const googleAuthentication = async () => {
     try {
       await signInWithPopup(auth, provider);
-      toast.success("User created successfully", { position: "top-center" });
+      toast.success("User login successfull", { position: "top-center" });
+      navigate("/dashboard");
     } catch (err) {
-      toast.error(err.message,{ position: "top-center" });
+      toast.error(err.message, { position: "top-center" });
     }
   };
+
   const closePopup = () => {
     setShow(false);
   };
@@ -40,6 +63,7 @@ export const Login = () => {
               className="block border w-80 px-3 py-2 rounded  mb-3"
               placeholder="Email address"
               id="email"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="password" className="mb-2  text-sm">
               Password
@@ -49,11 +73,17 @@ export const Login = () => {
               className="block border w-80 px-3 py-2 rounded  mb-2"
               placeholder="password"
               id="password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className="flex justify-end underline text-sm text-green-700 mb-5">
-              <a href="/#">Forgot password?</a>
+              <Link href="/#">Forgot password?</Link>
             </div>
-            <button className="bg-slate-800 rounded hover:bg-slate-700 text-white text-sm px-4 py-3 w-80 mt-1">
+            <button
+              className="bg-slate-800 rounded hover:bg-slate-700 text-white text-sm px-4 py-3 w-80 mt-1"
+              onClick={() => {
+                LoginWithPassword();
+              }}
+            >
               Sign in
             </button>
             <div className="flex justify-center text-sm text-green-700">
@@ -76,7 +106,7 @@ export const Login = () => {
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 className="w-5 inline-block mr-2"
               >
                 <path
