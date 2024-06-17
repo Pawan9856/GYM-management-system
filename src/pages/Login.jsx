@@ -1,9 +1,30 @@
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase-config";
+import { SignUpPopup } from "../components/SignUpPopup";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
-  
+  const [show, setShow] = useState(false);
+  const provider = new GoogleAuthProvider();
+  const googleAuthentication = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      toast.success("User created successfully", { position: "top-center" });
+    } catch (err) {
+      toast.error(err.message,{ position: "top-center" });
+    }
+  };
+  const closePopup = () => {
+    setShow(false);
+  };
+
   return (
     <>
+      <ToastContainer />
       <div className="fixed top-0 left-0 p-10 bg-slate-200 w-screen h-full font-roboto text-slate-500">
+        {show && <SignUpPopup closePopup={closePopup} />}
         <div className="fixed top-0 left-0 bg-green-200 w-0 md:w-[45%] lg:w-[55%] h-full">
           image
         </div>
@@ -29,10 +50,15 @@ export const Login = () => {
               placeholder="password"
               id="password"
             />
-            <div className="flex justify-end underline text-sm text-green-700 mb-5"><a href="/#">Forgot password?</a></div>
+            <div className="flex justify-end underline text-sm text-green-700 mb-5">
+              <a href="/#">Forgot password?</a>
+            </div>
             <button className="bg-slate-800 rounded hover:bg-slate-700 text-white text-sm px-4 py-3 w-80 mt-1">
               Sign in
             </button>
+            <div className="flex justify-center text-sm text-green-700">
+              <button onClick={() => setShow(true)}>Create account</button>
+            </div>
           </div>
 
           <div className="">
@@ -42,7 +68,10 @@ export const Login = () => {
           </div>
 
           <div className="">
-            <button className=" text-center px-3 py-1">
+            <button
+              className=" text-center px-3 py-1"
+              onClick={googleAuthentication}
+            >
               <svg
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
