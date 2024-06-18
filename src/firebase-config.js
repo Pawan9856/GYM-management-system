@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA5VOQifBDaZ57r1AeE3wQUOqtk_tQ8SIY",
-  authDomain: "gym-management-system-36a2a.firebaseapp.com",
-  projectId: "gym-management-system-36a2a",
-  storageBucket: "gym-management-system-36a2a.appspot.com",
-  messagingSenderId: "237325599324",
-  appId: "1:237325599324:web:5aec61f7f1b019859b5c99",
-  measurementId: "G-49WCL11DWH"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MSI,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MI
 };
 
 // Initialize Firebase
