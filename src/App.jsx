@@ -2,7 +2,8 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthRoute } from "./components/AuthRoute";
-import { DashBoard } from "./pages/Admin/DashBoard";
+import { AdminDashBoard } from "./pages/Admin/DashBoard";
+import { UserDashBoard } from "./pages/User/UserDashBoard";
 function App() {
   return (
     <>
@@ -17,7 +18,8 @@ function App() {
             </AuthRoute>
           }
         />
-        <Route path="/demo" element={<DashBoard />} />
+        <Route path="/admin-dashboard" element={<AdminDashBoard />} />
+        <Route path="/user-dashboard" element={<UserDashBoard />} />
       </Routes>
     </>
   );

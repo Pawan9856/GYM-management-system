@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDocs, collection, doc } from "firebase/firestore";
+import { getDocs, deleteDoc, collection, doc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import PackageCard from "../../components/PackageCard";
 import PackageForm from "../../components/PackageForm";
@@ -15,11 +15,20 @@ const ManagePackage = () => {
         ...doc.data(),
       }));
       setPackages(data);
-      console.log(data);
+      
     } catch (error) {
-      console.log(error);
+      toast.error(err.message, { position: "top-center" });
     }
   };
+  const deletePackage= async(id)=>{
+    try {
+      await deleteDoc(doc(db, "Packages", id));
+      getPackages();
+      toast.error("package deleted successfully!!", { position: "top-center" });
+    } catch (error) {
+      toast.error(err.message, { position: "top-center" });
+    }
+  }
   useEffect(() => {
     getPackages();
   }, []);
@@ -33,7 +42,7 @@ const ManagePackage = () => {
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 mt-10 mx-5 gap-10 lg:gap-16">
         {allPackage.map((Package) => {
-          return <PackageCard Package={Package} key={Package.id} />;
+          return <PackageCard Package={Package} deletePackage={deletePackage} key={Package.id} />;
         })}
       </div>
       {show && (

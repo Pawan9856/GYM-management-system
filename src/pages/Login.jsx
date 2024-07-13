@@ -9,6 +9,8 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, Link } from "react-router-dom";
+import BigLogo from "../assets/BigLogo.svg";
+import Logo from "../assets/Logo.svg";
 
 export const Login = () => {
   const [show, setShow] = useState(false);
@@ -16,12 +18,10 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
-  // const {signIn} = useAuth();
 
   const LoginWithPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // signIn();
       toast.success("User login successfull", { position: "top-center" });
       navigate("/dashboard");
     } catch (err) {
@@ -48,12 +48,14 @@ export const Login = () => {
       <ToastContainer />
       <div className="fixed top-0 left-0 p-10 bg-slate-200 w-screen h-full font-roboto text-slate-500">
         {show && <SignUpPopup closePopup={closePopup} />}
-        <div className="fixed top-0 left-0 bg-green-200 w-0 md:w-[45%] lg:w-[55%] h-full">
-          image
+        <div className="fixed top-0 left-0 bg-green-200 w-0 md:w-[45%] lg:w-[55%] h-full flex justify-center">
+          <img src={BigLogo} alt="not found" className="w-3/5" />
         </div>
 
         <div className="fixed top-0 left-0 md:left-[45%] lg:left-[55%] bg-green-50 w-full md:w-[55%] lg:w-[45%] h-full px-20 grid grid-cols-1 justify-items-center">
-          <div className="">logo</div>
+          <div className="w-1/3 flex justify-center">
+            <img src={Logo} alt="" className=""/>
+          </div>
           <div className="">
             <label htmlFor="email" className="mb-2  text-sm">
               Username or Email

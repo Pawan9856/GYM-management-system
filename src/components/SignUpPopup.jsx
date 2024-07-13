@@ -37,6 +37,7 @@ export const SignUpPopup = ({ closePopup }) => {
           firstName: formData.fName,
           lastName: formData.lName,
           phoneNo: formData.phoneNo,
+          role: "user",
         });
       }
       toast.success("User created successfully", { position: "top-center" });
