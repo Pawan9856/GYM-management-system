@@ -15,7 +15,6 @@ const AllUsers = () => {
           ...doc.data(),
         }));
         setUsers(allUsers);
-        // console.log(allUsers);
       } catch (err) {
         console.log(err.message);
       }

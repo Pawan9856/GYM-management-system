@@ -1,23 +1,21 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { useState,useEffect } from "react";
+import Navbar from "../../components/User/UserNav";
+import Announcements from "./Announcements";
+import Profile from "./Profile";
 
 export const UserDashBoard = () => {
-  const navigate = useNavigate();
-  const Logout = async () => {
-    await signOut(auth);
-    navigate("/login");
-  };
+  const [active, setActive] = useState("announcements");
+
+
   return (
     <>
-      <div>UserDashBoard</div>
-      <button
-        onClick={Logout}
-        className="bg-yellow-500 hover:bg-yellow-600 text-white rounded px-4 py-1"
-      >
-        sign out
-      </button>
+      <div className="bg-gradient-to-r from-green-300 to-green-200 w-full min-h-screen">
+        <Navbar setActive={setActive} active={active} />
+        {active === "announcements" && <Announcements />}
+        {active === "profile" && <Profile />}
+        
+      </div>
     </>
   );
 };
+

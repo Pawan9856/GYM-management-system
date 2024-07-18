@@ -1,11 +1,9 @@
-import React from "react";
-import Bin from "../../assets/Bin.svg";
+import React from 'react'
 
-function AnnouncementCard({ announcement, deleteAnnouncement }) {
+const AnnouncementCard = ({announcement}) => {
   return (
     <>
-      <div
-        key={announcement.id}
+    <div
         className="bg-blue-100 mx-4 rounded-lg my-2 px-3 py-1"
       >
         <div className="grid grid-cols-4 border-b-2 border-blue-200 mb-3 px-2 py-2 ">
@@ -27,17 +25,9 @@ function AnnouncementCard({ announcement, deleteAnnouncement }) {
         <div className="text-gray-600 mb-3">
           <p>{announcement.content}</p>
         </div>
-        <div className=" my-3 ">
-          <button
-            className="bg-red-500 text-white  px-4 py-1 rounded hover:bg-red-600 "
-            onClick={() => deleteAnnouncement(announcement.id)}
-          >
-            <img src={Bin} alt="" className="w-4 inline  " /> Remove
-          </button>
-        </div>
       </div>
     </>
-  );
+  )
 }
 
-export default AnnouncementCard;
+export default AnnouncementCard
