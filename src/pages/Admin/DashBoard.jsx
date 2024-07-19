@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Navbar from "../../components/AdminNav";
-import CreateBills from "./CreateBills";
+import Bills from "./Bills";
 import AllUsers from "./AllUsers";
 import Announcements from "./Announcements";
 import ManagePackage from "./ManagePackage";
-import Profile from "./Profile";
+import Profile from "../User/Profile";
 
 export const AdminDashBoard = () => {
   const [active, setActive] = useState("allUsers");
@@ -15,7 +15,7 @@ export const AdminDashBoard = () => {
         <Navbar setActive={setActive} active={active} />
         {active === "allUsers" && <AllUsers />}
         {active === "announcements" && <Announcements />}
-        {active === "createBills" && <CreateBills />}
+        {active === "bills" && <Bills />}
         {active === "managePackage" && <ManagePackage />}
         {active === "profile" && <Profile />}
       </div>

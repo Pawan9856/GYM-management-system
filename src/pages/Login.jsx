@@ -3,13 +3,14 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 import { SignUpPopup } from "../components/SignUpPopup";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import BigLogo from "../assets/BigLogo.svg";
 import Logo from "../assets/Logo.svg";
+import { setDoc, doc } from "firebase/firestore";
 
 export const Login = () => {
   const [show, setShow] = useState(false);
@@ -21,6 +22,7 @@ export const Login = () => {
   const LoginWithPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+
       toast.success("User login successfull", { position: "top-center" });
       navigate("/dashboard");
     } catch (err) {
@@ -30,7 +32,13 @@ export const Login = () => {
 
   const googleAuthentication = async () => {
     try {
-      await signInWithPopup(auth, provider);
+      const data = await signInWithPopup(auth, provider);
+      const userId = data.user.uid;
+      const email = data._tokenResponse.email;
+      await setDoc(doc(db, "Users", userId), {
+        email: email,
+        role: "user",
+      });
       toast.success("User login successfull", { position: "top-center" });
       navigate("/dashboard");
     } catch (err) {
@@ -44,7 +52,6 @@ export const Login = () => {
 
   return (
     <>
-      
       <div className="fixed top-0 left-0 p-10 bg-slate-200 w-screen h-full font-roboto text-slate-500">
         {show && <SignUpPopup closePopup={closePopup} />}
         <div className="fixed top-0 left-0 bg-green-200 w-0 md:w-[45%] lg:w-[55%] h-full flex justify-center">
@@ -53,7 +60,7 @@ export const Login = () => {
 
         <div className="fixed top-0 left-0 md:left-[45%] lg:left-[55%] bg-green-50 w-full md:w-[55%] lg:w-[45%] h-full px-20 grid grid-cols-1 justify-items-center">
           <div className="w-1/3 flex justify-center">
-            <img src={Logo} alt="" className=""/>
+            <img src={Logo} alt="" className="" />
           </div>
           <div className="">
             <label htmlFor="email" className="mb-2  text-sm">
@@ -76,9 +83,7 @@ export const Login = () => {
               id="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className="flex justify-end underline text-sm text-green-700 mb-5">
-              <Link href="/#">Forgot password?</Link>
-            </div>
+
             <button
               className="bg-slate-800 rounded hover:bg-slate-700 text-white text-sm px-4 py-3 w-80 mt-1"
               onClick={() => {
@@ -87,7 +92,7 @@ export const Login = () => {
             >
               Sign in
             </button>
-            <div className="flex justify-center text-sm text-green-700">
+            <div className="flex justify-center text-sm text-green-700 mt-1">
               <button onClick={() => setShow(true)}>Create account</button>
             </div>
           </div>

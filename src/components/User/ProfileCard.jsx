@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { signOut, onAuthStateChanged } from "firebase/auth";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, deleteObject, getDownloadURL } from "firebase/storage";
 import { toast } from "react-toastify";
 import { v4 } from "uuid";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
@@ -12,7 +10,6 @@ import Upload from "../../assets/Upload.svg";
 
 const ProfileCard = () => {
   const [uploadFile, setUploadFile] = useState(null);
-  const navigate = useNavigate();
   const id = auth.currentUser.uid;
   const [active, setActive] = useState(false);
   const [userData, setUserData] = useState({});
@@ -51,10 +48,6 @@ const ProfileCard = () => {
     } catch (err) {
       toast.error(err.message, { position: "top-center" });
     }
-  };
-  const Logout = async () => {
-    await signOut(auth);
-    navigate("/login");
   };
   const activeChange = () => {
     setActive(!active);
@@ -115,8 +108,6 @@ const ProfileCard = () => {
             <InfoEdit userData={userData} active={activeChange} id={id} />
           )}
         </div>
-
-        {/* <button onClick={Logout}>logout</button> */}
       </div>
     </>
   );

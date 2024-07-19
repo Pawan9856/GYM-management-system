@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Profile from "../../assets/Profile.svg"
 
 const Navbar = ({ active, setActive }) => {
   return (
@@ -21,12 +22,12 @@ const Navbar = ({ active, setActive }) => {
           <li className=" px-4 py-2">
             <a
               href="#"
-              onClick={() => setActive("currentPackage")}
+              onClick={() => setActive("selectPackage")}
               className={` ${
-                active === "currentPackage" ? "border-b-2 border-black" : ""
+                active === "selectPackage" ? "border-b-2 border-black" : ""
               } py-2 px-3 hover:bg-green-200`}
             >
-              Current Package
+              Select Package
             </a>
           </li>
           <li className=" px-4 py-2">
@@ -43,7 +44,7 @@ const Navbar = ({ active, setActive }) => {
         </ul>
         <div className="col-end-7 flex justify-center">
           <button onClick={() => setActive("profile")} className="">
-            profile
+            <img src={Profile} alt="" className="w-8" />
           </button>
         </div>
       </nav>

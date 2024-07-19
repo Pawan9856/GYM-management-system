@@ -16,7 +16,7 @@ const ManagePackage = () => {
         ...doc.data(),
       }));
       setPackages(data);
-    } catch (error) {
+    } catch (err) {
       toast.error(err.message, { position: "top-center" });
     }
   };
@@ -45,7 +45,7 @@ const ManagePackage = () => {
           Add New Package
         </button>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 mt-10 mx-5 gap-10 lg:gap-16">
+      <div className="grid grid-cols-2 lg:grid-cols-3 mt-10 mx-5 gap-5 lg:gap-10">
         {allPackage.map((Package) => {
           return (
             <PackageCard

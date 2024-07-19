@@ -10,10 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/x-date-pickers": "^7.11.0",
+    "date-fns": "^3.6.0",
+    "dayjs": "^1.11.12",
     "firebase": "^10.12.2",
     "react": "^18.2.0",
+    "react-datepicker": "^7.3.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
+    "react-tailwindcss-datepicker": "^1.6.6",
     "react-toastify": "^10.0.5",
     "uuid": "^10.0.0"
   },

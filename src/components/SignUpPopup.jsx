@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase-config";
 import { doc, setDoc } from "firebase/firestore";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const SignUpPopup = ({ closePopup }) => {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ export const SignUpPopup = ({ closePopup }) => {
     fName: "",
     lName: "",
     phoneNo: "",
+    photoUrl:
+      "https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg",
   });
 
   const handleChange = (e) => {
@@ -25,25 +27,24 @@ export const SignUpPopup = ({ closePopup }) => {
     e.preventDefault();
     console.log(formData);
     try {
-      await createUserWithEmailAndPassword(
+      const data = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      const user = auth.currentUser;
-      if (user) {
-        await setDoc(doc(db, "Users", user.uid), {
-          email: formData.email,
-          firstName: formData.fName,
-          lastName: formData.lName,
-          phoneNo: formData.phoneNo,
-          role: "user",
-        });
-      }
+      const userId = data.user.uid;
+
+      await setDoc(doc(db, "Users", userId), {
+        email: formData.email,
+        firstName: formData.fName,
+        lastName: formData.lName,
+        phoneNo: formData.phoneNo,
+        role: "user",
+      });
       toast.success("User created successfully", { position: "top-center" });
       closePopup();
     } catch (err) {
-      toast.error(err.message,{ position: "top-center" });
+      toast.error(err.message, { position: "top-center" });
     }
   };
   return (
@@ -51,7 +52,6 @@ export const SignUpPopup = ({ closePopup }) => {
       className="fixed inset-0 bg-slate-600 bg-opacity-50 flex justify-center items-center z-10"
       onClick={closePopup}
     >
-      
       <div
         className="bg-white p-10 rounded shadow-lg max-w-lg w-full overflow-y-auto h-[400px] "
         onClick={(e) => e.stopPropagation()}

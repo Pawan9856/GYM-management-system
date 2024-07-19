@@ -9,7 +9,7 @@ const PackageCard = ({ Package, deletePackage }) => {
           <h1 className="text-2xl">{Package.name}</h1>
           <p>Price: ${Package.price}/m</p>
         </div>
-        <div className="mb-5 p-2">
+        <div className="mb-5 p-2 h-52 overflow-y-auto">
           <p>{Package.description}</p>
         </div>
         <div className="flex justify-center ">
