@@ -11,7 +11,7 @@ export const AdminDashBoard = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-green-300 to-green-200 w-full min-h-screen">
+      <div className="bg-gradient-to-r from-green-300 to-green-200 w-full min-h-screen pb-5">
         <Navbar setActive={setActive} active={active} />
         {active === "allUsers" && <AllUsers />}
         {active === "announcements" && <Announcements />}

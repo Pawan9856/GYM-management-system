@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
-import Receipt from "../../assets/Receipt.svg";
 
 const BillCard = ({ bill }) => {
   const [userData, setUserData] = useState({});
@@ -32,6 +31,7 @@ const BillCard = ({ bill }) => {
     getUser();
     getPackage();
   }, []);
+  
 
   return (
     <>

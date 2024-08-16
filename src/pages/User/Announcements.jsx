@@ -26,8 +26,8 @@ const Announcements = () => {
   }, []);
   return (
     <>
-      <div className="h-screen w-screen flex justify-center">
-        <div className="bg-slate-50 rounded-xl shadow-lg w-3/5 mb-3 overflow-y-auto ">
+      <div className="h-full w-screen flex justify-center px-5 ">
+        <div className="bg-slate-50 rounded-xl shadow-lg w-full h-[600px] max-h-full  max-w-[800px] mb-3 overflow-y-auto">
           <div className="bg-slate-100 rounded-t-xl text-xl py-2 w-full flex justify-center border-b-2 border-slate-200">
             <img src={Speaker} alt="not found" className="w-5 inline mr-2" />{" "}
             Announcements
@@ -47,7 +47,7 @@ const Announcements = () => {
 
           {announcements && announcements.length == 0 && (
             <div className="flex flex-col pb-3 items-center justify-center">
-              <img src={NotFound} className="w-3/5 " />
+              <img src={NotFound} className="sm:max-w-[500px] min-w-[450px] " />
               <p className="text-gray-600 text-lg">
                 No New Announcements At This Time
               </p>

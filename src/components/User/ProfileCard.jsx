@@ -55,8 +55,8 @@ const ProfileCard = () => {
   };
   return (
     <>
-      <div className="bg-slate-50 px-12 py-16 h-full shadow-lg rounded-lg hover:shadow-xl flex justify-evenly">
-        <div className="w-1/2 h-full grid grid-rows-3 content-center p-5 ">
+      <div className="bg-slate-50 px-3 py-3 sm:px-12 sm:py-16 h-full shadow-lg rounded-lg hover:shadow-xl flex justify-evenly flex-col sm:flex-row">
+        <div className="w-full sm:w-1/2 h-full grid grid-rows-3 content-center p-5 ">
           <div className="row-span-2 flex justify-center p-2 border-2 mb-1">
             <img src={userData?.photoUrl} alt="" className=" object-contain" />
           </div>
@@ -72,7 +72,7 @@ const ProfileCard = () => {
                 </div>
                 <div className="flex justify-center text-center">
                   {uploadFile ? (
-                    <p className="text-[12px] lg:text-sm">{uploadFile.name}</p>
+                    <p className="text-[12px] lg:text-sm ">{uploadFile.name}</p>
                   ) : (
                     <p className="text-[12px] lg:text-sm">
                       <span className="font-bold">Click to upload </span>or drag
@@ -102,7 +102,7 @@ const ProfileCard = () => {
           </div>
         </div>
 
-        <div className="w-1/2 p-3 ">
+        <div className="w-full sm:w-1/2 p-3">
           {!active && <Info userData={userData} active={activeChange} />}
           {active && (
             <InfoEdit userData={userData} active={activeChange} id={id} />

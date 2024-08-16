@@ -37,7 +37,7 @@ const ManagePackage = () => {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <button
           onClick={() => setShow(true)}
           className="bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded mt-3"
@@ -45,7 +45,7 @@ const ManagePackage = () => {
           Add New Package
         </button>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 mt-10 mx-5 gap-5 lg:gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center mt-10 mx-5 sm:gap-5 lg:gap-10 pb-10">
         {allPackage.map((Package) => {
           return (
             <PackageCard

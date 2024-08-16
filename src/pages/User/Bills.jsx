@@ -38,8 +38,8 @@ const Bills = () => {
             })}
           </div>
         </div>
-        <div className="p-20">
-          <img src={BillReceiptMen} alt="" />
+        <div className="px-5 py-20 hidden lg:flex justify-center items-center">
+          <img src={BillReceiptMen} alt="" className="w-[500px]"/>
         </div>
       </div>
     </>

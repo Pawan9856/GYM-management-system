@@ -42,14 +42,15 @@ const Announcements = () => {
         closePopup={closePopup}
         getAnnouncements={getAnnouncements}
       />
-      <div className="h-screen w-screen flex justify-center">
-        <div className="bg-slate-50 rounded-xl shadow-lg w-3/5 mb-3 overflow-y-auto ">
+      <div className="h-full w-screen flex justify-center px-5">
+        <div className="bg-slate-50 rounded-xl shadow-lg w-full h-[600px] max-h-full  max-w-[800px] mb-3  overflow-y-auto ">
           <div className="bg-slate-100 rounded-t-xl  w-full flex justify-center border-b-2 border-slate-200">
             <button
-              className="bg-blue-200 my-2 rounded px-4 py-2 text-lg hover:bg-blue-300 text-gray-600 hover:text-black "
+              className="bg-blue-200 text-sm  my-2 rounded px-4 py-2 lg:text-lg hover:bg-blue-300 text-gray-600 hover:text-black "
               onClick={() => setShow(true)}
             >
-              <img src={Speaker} alt="not found" className="w-5 inline mr-1"/> Announcements
+              <img src={Speaker} alt="not found" className="w-5 inline mr-1" />{" "}
+              Announcements
             </button>
           </div>
 
@@ -68,11 +69,13 @@ const Announcements = () => {
 
           {announcements && announcements.length == 0 && (
             <div className="flex flex-col pb-5 items-center justify-center">
-              <img src={NotFound} className="w-3/5 " />
-              <p className="text-gray-600 text-lg">
+              <div className=" ">
+              <img src={NotFound} className="sm:max-w-[500px] min-w-[450px] " />
+              </div>
+              <p className="text-gray-600 text-sm lg:text-lg">
                 No New Announcements At This Time
               </p>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-[12px] lg:text-sm">
                 check back later for update
               </p>
             </div>

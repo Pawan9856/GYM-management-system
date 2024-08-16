@@ -3,10 +3,11 @@ import PackageCard from "../../components/User/PackageCard";
 import { toast } from "react-toastify";
 import { getDocs, collection, addDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
-import Datepicker from "react-tailwindcss-datepicker";
+// import Datepicker from "react-tailwindcss-datepicker";
 import SelectiveMan from "../../assets/SelectiveMan.svg";
-
+import DatePicker from "../../components/DatePicker.jsx";
 const SelectPackage = () => {
+  const [date, setDate] = useState();
   const [allPackage, setPackages] = useState([]);
   const userId = auth.currentUser.uid;
   const [formData, setFormData] = useState({
@@ -15,7 +16,11 @@ const SelectPackage = () => {
     packageId: "",
     UPIRefNo: "",
   });
-  const [value, setValue] = useState({});
+
+  useEffect(() => {
+    setFormData((formData) => ({ ...formData, date: date?.toString() }));
+  }, [date]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,13 +47,6 @@ const SelectPackage = () => {
     }
   };
 
-  const handleValueChange = (newValue) => {
-    setValue(newValue);
-    setFormData({
-      ...formData,
-      date: newValue.startDate,
-    });
-  };
   const handlePackageChange = (id) => {
     setFormData({
       ...formData,
@@ -74,16 +72,18 @@ const SelectPackage = () => {
       toast.error(err.message, { position: "top-center" });
     }
   };
+
   useEffect(() => {
     getPackages();
   }, []);
+
   return (
     <>
-      <div className="grid grid-cols-2 gap-2 ">
-        <div className=" p-5  ">
+      <div className="flex flex-row  gap-2 justify-center items-center px-5 mt-10">
+        <div className="w-full max-w-[700px] lg:w-[600px]">
           <form
             action=""
-            className="max-w-[600px] p-5 border-2 bg-slate-200 border-gray-500 rounded shadow-md"
+            className=" p-5 border-2 bg-slate-200 border-gray-500 rounded shadow-md"
             onSubmit={handleSubmit}
           >
             <div className="mb-5 p-1">
@@ -94,12 +94,7 @@ const SelectPackage = () => {
                 >
                   Select a date
                 </label>
-                <Datepicker
-                  useRange={false}
-                  asSingle={true}
-                  value={value}
-                  onChange={handleValueChange}
-                />
+                <DatePicker date={date} setDate={setDate} />
               </div>
               <div className="">
                 <label
@@ -157,8 +152,12 @@ const SelectPackage = () => {
             </button>
           </form>
         </div>
-        <div className="p-10">
-          <img src={SelectiveMan} alt="not found" />
+        <div className="hidden justify-center items-center px-5 lg:flex">
+          <img
+            src={SelectiveMan}
+            alt="not found"
+            className="lg:w-[500px] xl:w-[600px]"
+          />
         </div>
       </div>
     </>

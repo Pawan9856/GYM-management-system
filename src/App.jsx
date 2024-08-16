@@ -21,8 +21,22 @@ function App() {
             </AuthRoute>
           }
         />
-        <Route path="/admin-dashboard" element={<AdminDashBoard />} />
-        <Route path="/user-dashboard" element={<UserDashBoard />} />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <AuthRoute>
+              <AdminDashBoard />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/user-dashboard"
+          element={
+            <AuthRoute>
+              <UserDashBoard />
+            </AuthRoute>
+          }
+        />
       </Routes>
     </>
   );
