@@ -58,17 +58,17 @@ export const Login = () => {
           <img src={BigLogo} alt="not found" className="w-3/5" />
         </div>
 
-        <div className="fixed top-0 left-0 md:left-[45%] lg:left-[55%] bg-green-50 w-full md:w-[55%] lg:w-[45%] h-full px-20 grid grid-cols-1 justify-items-center">
-          <div className="w-1/3 flex justify-center">
-            <img src={Logo} alt="" className="" />
+        <div className="fixed top-0 left-0 md:left-[45%] lg:left-[55%] bg-green-50 w-full md:w-[55%] lg:w-[45%] h-full ms:px-20 px-1 grid grid-cols-1 justify-items-center">
+          <div className=" flex justify-center">
+            <img src={Logo} alt="" className="sm:w-[200px] w-full max-w-[250px] " />
           </div>
-          <div className="">
+          <div className="flex flex-col px-2">
             <label htmlFor="email" className="mb-2  text-sm">
               Username or Email
             </label>
             <input
               type="text"
-              className="block border w-80 px-3 py-2 rounded  mb-3"
+              className="block border w-full sm:w-80 px-3 py-2 rounded  mb-3"
               placeholder="Email address"
               id="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +78,7 @@ export const Login = () => {
             </label>
             <input
               type="password"
-              className="block border w-80 px-3 py-2 rounded  mb-2"
+              className="block border  w-full sm:w-80 px-3 py-2 rounded  mb-2"
               placeholder="password"
               id="password"
               onChange={(e) => setPassword(e.target.value)}
@@ -97,10 +97,10 @@ export const Login = () => {
             </div>
           </div>
 
-          <div className="">
-            <div className="border-t-2 h-2 w-24 inline-block"></div>
+          <div className="w-full flex justify-center">
+            <div className="border-t-2 h-2 mt-3 w-24 inline-block"></div>
             <span className="mx-4">or</span>
-            <div className="border-t-2 h-2 w-24 inline-block"></div>
+            <div className="border-t-2 h-2 mt-3 w-24 inline-block"></div>
           </div>
 
           <div className="">
