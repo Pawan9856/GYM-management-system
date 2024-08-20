@@ -31,6 +31,9 @@ const BillCard = ({ bill }) => {
     getUser();
     getPackage();
   }, []);
+
+  if(!userData) return <></>
+  if(!packageData) return <></>
   
 
   return (
